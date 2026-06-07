@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo Cờ Ca Rô - Quân Tròn (demo-caro)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header>
+      <h1>Demo Cờ Ca Rô - 5 Quân Liên Tiếp (demo-caro)</h1>
+      <p>Bắt đầu với bàn cờ trống. Chọn quân trắng hoặc đen trước tiên, sau đó mỗi lượt tự đổi màu.</p>
+    </header>
+
+    <div id="fireworks" class="fireworks"></div>
+
+    <section class="board-panel">
+      <div id="board" class="board"></div>
+    </section>
+
+    <aside class="status-panel">
+      <div class="info-row">
+        <span>Chọn quân đầu tiên:</span>
+        <div class="color-buttons">
+          <button type="button" id="chooseBlack">Đen</button>
+          <button type="button" id="chooseWhite">Trắng</button>
+        </div>
+      </div>
+      <div class="info-row">
+        <span>Quân hiện tại:</span>
+        <span id="current-player" class="player-indicator">Chưa chọn</span>
+      </div>
+      <div class="info-row">
+        <button type="button" id="resetButton">Làm mới ván mới</button>
+      </div>
+      <div id="message" class="message">Bấm chọn màu để bắt đầu ván mới.</div>
+    </aside>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

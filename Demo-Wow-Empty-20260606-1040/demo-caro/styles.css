@@ -1,0 +1,96 @@
+:root {
+  --light-square: #f3e9d2;
+  --dark-square: #7c4f2b;
+  --board-border: #4a2e16;
+  --text: #242424;
+}
+
+* { box-sizing: border-box; }
+body { margin:0; font-family:Segoe UI, Tahoma, Geneva, Verdana, sans-serif; background: radial-gradient(circle at top,#f7f1e9,#d9c3a2); color:var(--text);} 
+.app-shell{min-height:100vh;padding:24px;display:grid;gap:24px;max-width:1080px;margin:0 auto;position:relative}
+header{text-align:center}
+.board-panel{display:flex;justify-content:center;padding-top:120px}
+.board{display:grid;grid-template-columns:repeat(15,minmax(32px,44px));grid-template-rows:repeat(15,minmax(32px,44px));gap:0;border:6px solid var(--board-border);border-radius:18px;box-shadow:0 18px 48px rgba(0,0,0,0.18)}
+.square{width:100%;aspect-ratio:1/1;display:grid;place-items:center;cursor:pointer;position:relative}
+.square.light{background:var(--light-square)}
+.square.dark{background:var(--dark-square)}
+.piece{width:68%;height:68%;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.piece.black{background:#222;color:#fff}
+.piece.white{background:#fff;color:#222;border:2px solid #c7b59e}
+.status-panel{position:fixed;top:24px;right:24px;width:min(340px,calc(100vw - 32px));min-width:320px;background:rgba(255,255,255,0.96);border-radius:18px;padding:20px;border:1px solid rgba(156,122,87,0.24);box-shadow:0 18px 40px rgba(0,0,0,0.16);z-index:10}
+.color-buttons{display:inline-flex;gap:12px;align-items:center}
+.message{color:#4c3a2c}
+
+/* Buttons in the status panel */
+.status-panel button{
+  border: 1px solid rgba(124,79,43,0.12);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  background: #7c4f2b;
+  color: #fff;
+  transition: transform 0.12s ease, background 0.12s ease, box-shadow 0.12s ease;
+  box-shadow: 0 6px 14px rgba(124,79,43,0.06);
+}
+.status-panel button:not(:disabled):hover{
+  transform: translateY(-2px);
+  background: #65361f;
+}
+.color-buttons button{
+  position: relative;
+}
+
+/* Active state matches original demo: small yellow halo and slightly raised */
+.color-buttons button.active{
+  background: linear-gradient(#f7d88a, #f2c96a);
+  color: #3b2a18;
+  box-shadow: 0 10px 22px rgba(98,57,22,0.18), inset 0 -2px 0 rgba(0,0,0,0.06);
+  transform: translateY(-3px);
+}
+
+.color-buttons button:disabled,
+.status-panel button:disabled{
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* subtle ring behind active button to mimic previous design */
+.color-buttons button.active::before{
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: rgba(255,215,122,0.14);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Player indicator (current player) styling to match original demo */
+.player-indicator{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 12px;
+  border-radius:999px;
+  background:#fff6d9;
+  border:1px solid rgba(161,126,78,0.18);
+  color:#3b2a18;
+  font-weight:700;
+  min-width:86px;
+}
+
+/* Stabilize button widths to avoid layout shift */
+.status-panel .color-buttons button{min-width:76px;text-align:center;padding-left:12px;padding-right:12px}
+
+/* Increase spacing between rows inside status panel */
+.status-panel .info-row{margin-bottom:16px}
+.fireworks{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:5}
+.firework{position:absolute;width:14px;height:14px;border-radius:50%;opacity:0;filter:drop-shadow(0 0 12px rgba(255,255,255,0.65));animation:burst 1.4s ease-out forwards}
+@keyframes burst{0%{transform:translate(0,0) scale(0.5);opacity:1}30%{opacity:1;transform:translate(calc(var(--tx)*0.4),calc(var(--ty)*0.4)) scale(1)}60%{opacity:1;transform:translate(calc(var(--tx)*0.8),calc(var(--ty)*0.8)) scale(1.2)}100%{transform:translate(var(--tx),var(--ty)) scale(1.4);opacity:0}}
