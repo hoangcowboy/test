@@ -1,0 +1,28 @@
+---
+applyTo: "ShopApi/Controllers/**/*.cs"
+description: Conventions for ASP.NET Core controllers
+---
+
+# Controller Conventions
+
+<!--
+  Loaded ONLY when editing a file matching applyTo above.
+  Use this file for rules that only make sense for controllers.
+-->
+
+## Shape
+
+- TODO: how thin is a controller? (one paragraph)
+- TODO: dependency injection style (primary constructor vs ctor + field)
+- TODO: return type policy (ActionResult<T> vs IActionResult)
+
+## HTTP semantics
+
+- TODO: POST returns
+- TODO: PUT returns
+- TODO: DELETE returns
+- TODO: where do errors get translated to ProblemDetails
+
+## Forbidden in controllers
+
+- TODO: at least 3 things controllers must never do

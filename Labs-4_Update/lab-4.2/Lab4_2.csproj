@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>TrainingLab.Security</RootNamespace>
+    <!-- Library — no entry point needed; lab is for code-reading, not running -->
+    <OutputType>Library</OutputType>
+    <!-- BinaryFormatter is intentionally vulnerable code — keep error visible but allow build -->
+    <NoWarn>$(NoWarn);SYSLIB0011</NoWarn>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+    <!-- Dependencies cho VulnerableCode.fixed.cs -->
+    <PackageReference Include="HtmlSanitizer" Version="8.1.870" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="VulnerableCode.fixed.cs" />
+  </ItemGroup>
+
+</Project>

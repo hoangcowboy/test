@@ -1,0 +1,42 @@
+# Copilot Instructions — <YOUR TEAM>
+
+<!--
+  This file is loaded automatically for every prompt in this workspace.
+  Keep it short, opinionated, enforceable.
+  Fill in the TODO blocks with rules from your real team.
+-->
+
+## Stack
+
+- TODO: language and major framework version (e.g. .NET 8, C# 12)
+- TODO: web framework (e.g. ASP.NET Core minimal API)
+- TODO: ORM and database
+- TODO: test stack
+
+## Code Style
+
+- TODO: namespace style (file-scoped vs traditional)
+- TODO: var usage policy
+- TODO: async naming policy
+- TODO: CancellationToken policy
+
+## Naming
+
+- TODO: service interface convention (e.g. I{Name}Service)
+- TODO: private field convention (e.g. _camelCase)
+- TODO: constant convention
+
+## Layering
+
+- TODO: where business logic lives
+- TODO: when to introduce a repository
+
+## Error Handling
+
+- TODO: how to surface a business error
+- TODO: validation error format
+- TODO: logging convention
+
+## Forbidden
+
+- TODO: at least 4 things the team must NEVER do

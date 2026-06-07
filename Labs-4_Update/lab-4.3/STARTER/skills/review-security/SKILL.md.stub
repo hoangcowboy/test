@@ -1,0 +1,54 @@
+---
+name: review-security
+description: |
+  TODO: Một câu — Use this skill when ...
+  - bullet OWASP coverage 1
+  - bullet OWASP coverage 2
+---
+
+# Review Security Skill
+
+<!--
+  Promote từ .prompt.md (Lab 4.2) sang folder skill.
+  Lý do: OWASP checklist 50+ dòng, recurring, applied to mọi PR
+  touching auth/SQL/HTML.
+-->
+
+## When to use
+
+- TODO: condition 1
+- TODO: condition 2
+
+## Workflow
+
+1. Read target file (or `${selection}`)
+2. Walk OWASP categories
+3. For each finding: severity, file:line, description, fix snippet, OWASP link
+
+## OWASP categories
+
+### A01 — Broken Access Control
+- TODO: items
+
+### A02 — Cryptographic Failures
+- TODO: items
+
+### A03 — Injection
+- TODO: items
+
+### A07 — Authentication Failures
+- TODO: items
+
+## Output format
+
+```
+### Critical
+- file:line — description
+  Why dangerous
+  Fix
+  https://owasp.org/...
+```
+
+## Verify pass criterion
+
+After fix, re-run skill. Target: 0 Critical / 0 High.

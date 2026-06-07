@@ -1,0 +1,55 @@
+---
+name: review-pr
+description: |
+  TODO: Một câu — Use this skill when ...
+  - bullet team checklist 1
+  - bullet team checklist 2
+---
+
+# Review PR Skill
+
+<!--
+  Promote từ .prompt.md (Lab 4.1) sang folder skill.
+  Lý do: checklist dài, recurring, cần "Use this skill when..." trigger
+  để Copilot tự match khi user paste diff hoặc PR.
+-->
+
+## When to use
+
+- TODO: condition 1
+- TODO: condition 2
+
+## Workflow
+
+1. Read the diff (`git diff origin/main..HEAD` or `${selection}`)
+2. Read `copilot-instructions.md` for team conventions
+3. Walk checklist below
+4. Group findings by severity
+
+## Checklist
+
+### Security
+- TODO: rules
+
+### Performance
+- TODO: rules
+
+### Correctness
+- TODO: rules
+
+### Style
+- TODO: rules
+
+## Output format
+
+```
+## Review by review-pr skill
+### Blocking issues (Block)
+…
+### Improvements (Suggest)
+…
+### Nits (Nit)
+…
+### Summary
+Top 3 priorities.
+```

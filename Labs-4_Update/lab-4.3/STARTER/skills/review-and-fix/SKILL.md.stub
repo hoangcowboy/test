@@ -1,0 +1,38 @@
+---
+name: review-and-fix
+description: |
+  Use this skill when the user pastes a PR or branch name and asks
+  for an end-to-end review + auto-fix of blocking findings.
+  Orchestrates three agents: reviewer, fixer, tester.
+---
+
+# Review and Fix — YOUR orchestrator
+
+<!--
+  Đây là DELIVERABLE CHÍNH của lab. BẠN tự thiết kế pipeline.
+  Recipe 5 bước (slide):
+    1. Scope    — outcome user-visible duy nhất là gì?
+    2. Phases   — cắt thành 3–6 phase deterministic
+    3. Agents   — mỗi phase 1 persona (senior-reviewer, fixer, tester) — chọn từ dropdown, không phải @
+    4. Contract — chọn tag / artefact truyền giữa các phase ([BLOCK]/[SUGGEST]/[NIT], REVIEW.md...)
+    5. Budget   — số retry, hành động self-heal, điều kiện escalation
+-->
+
+## Phases
+
+<!-- TODO: cắt thành 3–6 phase. Mỗi phase: gọi agent nào, đọc/ghi gì (contract). -->
+1. TODO — Review → persona senior-reviewer → ...
+2. TODO — Fix → persona fixer → ...
+3. TODO — Verify → persona tester → ...
+
+## Retry budget
+
+<!-- TODO: điền cho mỗi phase: số attempts, self-heal action, escalation. -->
+| Phase | Attempts | Self-heal | Escalation |
+|-------|---------:|-----------|------------|
+| TODO  |          |           |            |
+
+## Output artefacts
+
+<!-- TODO: liệt kê artefact tạo ra (vd REVIEW.md, 1 commit [ai] / finding, trạng thái cuối). -->
+- TODO

@@ -1,0 +1,42 @@
+name: PR Summary
+
+on:
+  pull_request:
+    types: [opened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  summary:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.body == '' || github.event.pull_request.body == null }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install GitHub Copilot CLI
+        run: npm install -g @github/copilot
+
+      - name: Generate summary
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        run: |
+          git diff origin/${{ github.base_ref }}...HEAD > diff.patch
+          PROMPT="$(cat .github/prompts/explain-pr.prompt.md)"
+          copilot -p "${PROMPT}
+
+          ## Diff (output PR description as Markdown to stdout):
+
+          $(cat diff.patch)" --no-ask-user > summary.md
+
+      - name: Update PR body
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr edit ${{ github.event.pull_request.number }} --body-file summary.md

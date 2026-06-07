@@ -1,0 +1,3 @@
+C:\Users\tua946\Downloads\OneDrive_2_07-06-2026\Labs-4_Update\lab-4.2\obj\Debug\net8.0\Lab4_2.csproj.AssemblyReference.cache
+C:\Users\tua946\Downloads\OneDrive_2_07-06-2026\Labs-4_Update\lab-4.2\obj\Debug\net8.0\Lab4_2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tua946\Downloads\OneDrive_2_07-06-2026\Labs-4_Update\lab-4.2\obj\Debug\net8.0\Lab4_2.csproj.CoreCompileInputs.cache

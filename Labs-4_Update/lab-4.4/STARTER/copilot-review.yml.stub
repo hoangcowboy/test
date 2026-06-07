@@ -1,0 +1,76 @@
+# OPTIONAL / ADVANCED — chạy team prompt riêng trong CI bằng GitHub Copilot CLI.
+# Lớp 1 (Copilot review tự động) bật bằng ruleset trong Settings, KHÔNG cần file này.
+# Yêu cầu: repo secret PERSONAL_ACCESS_TOKEN = PAT có quyền "Copilot Requests".
+
+name: AI Review (team prompt)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: ai-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  ai-review:                       # <- giữ tên job là 'ai-review' để khớp required status check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install GitHub Copilot CLI
+        run: npm install -g @github/copilot
+
+      - name: Get PR diff
+        id: diff
+        run: |
+          git diff origin/${{ github.base_ref }}...HEAD > diff.patch
+          echo "diff_size=$(wc -l < diff.patch)" >> "$GITHUB_OUTPUT"
+
+      - name: Skip if diff too large
+        if: ${{ fromJSON(steps.diff.outputs.diff_size) > 2000 }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr comment ${{ github.event.pull_request.number }} \
+            --body "Diff too large (${{ steps.diff.outputs.diff_size }} lines). AI review skipped."
+
+      - name: Run Copilot review with team prompt
+        if: ${{ fromJSON(steps.diff.outputs.diff_size) <= 2000 }}
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        run: |
+          # TODO: chọn nguồn prompt — Lab 4.1 prompt hoặc skill review-pr
+          PROMPT="$(cat .github/prompts/review-pr.prompt.md)"
+
+          copilot -p "${PROMPT}
+
+          ## Diff to review (output Markdown to stdout):
+
+          $(cat diff.patch)" --no-ask-user > review-output.md
+
+      - name: Post review comment
+        if: ${{ fromJSON(steps.diff.outputs.diff_size) <= 2000 }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh pr comment ${{ github.event.pull_request.number }} --body-file review-output.md
+
+      # TODO (optional): khi có finding [BLOCK] thì add security team review
+      # - name: Request security review
+      #   if: ${{ fromJSON(steps.diff.outputs.diff_size) <= 2000 }}
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: |
+      #     if grep -q '\[BLOCK\]' review-output.md; then
+      #       gh pr edit ${{ github.event.pull_request.number }} --add-reviewer <your-org>/security-team || true
+      #     fi
